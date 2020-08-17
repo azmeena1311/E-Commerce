@@ -27,12 +27,8 @@ export class ProductCardComponent implements OnInit {
     this.cartService.addToCart(this.product);
     console.log(this.product);
 
-    this.cartService._cartObservable.subscribe({
-      next : (cart)=>{
-       this.quantity =  this.cartService.getQuantity(this.product)
-      }
-    })
     
   }
 
+  
 }

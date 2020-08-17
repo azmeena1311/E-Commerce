@@ -29,4 +29,19 @@ export class ProductService {
         })
       )
   }
+
+
+  getAllProductsById(id : string){
+    return this.http.get(`${this.getAllProductURL}/${id}`,
+      {
+        headers:{
+          'authorization' : this.userService.getToken()
+        }
+      })
+      .pipe(
+        map((result)=>{
+          return <Product>result
+        })
+      )
+  }
 }

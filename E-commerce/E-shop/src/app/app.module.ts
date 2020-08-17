@@ -15,6 +15,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import{HttpClientModule} from '@angular/common/http'
 import { from } from 'rxjs';
+import { ProductQuantityComponent } from './component/product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { from } from 'rxjs';
     UserOrdersComponent,
     CartComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,7 @@
         (click)='addToCart()'>Add to Cart </a>
 
         <ng-template #cartQuantity>
-            <div class="row n-gutters">
-                <div class="col 2"><button class="btn btn-secondary" type="button">-</button></div>
-                 <div class="col text-center">{{quantity}} in cart</div>
-                 <div class="col 2"><button class="btn btn-secondary" type="button">+</button></div>  
-             </div>
-            
+            <app-product-quantity [product] ='product'></app-product-quantity>
         </ng-template>
 
 
