@@ -13,6 +13,14 @@ export class UserService {
   private userloginurl = "http://localhost/api/users/login";
   constructor(private http :HttpClient) { }
 
+  private savetokenToLocalStorage(token: string){
+    localStorage.setItem('token',"Bearer "+ token)
+  }
+
+  getToken(){
+    return localStorage.getItem('token')? localStorage.getItem('token'): "";
+  }
+
   signup(user :User){
     return this.http.post(this.userSignupUrl,user)
     .pipe(
@@ -27,7 +35,9 @@ export class UserService {
 
   return  this.http.post(this.userloginurl,credentials)
   .pipe(
-    map(result =>{
+    map((result:loginResponse )=>{
+
+      this.savetokenToLocalStorage(result.token)
       return <loginResponse>result
     })
   )
