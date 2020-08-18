@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,10 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class HeaderComponent implements OnInit {
 
-
+  isLoggedIn = false;
   numberofItems :number =0;
-  constructor(private cartService : CartService) { }
+  isAdmin$;
+  constructor(private cartService : CartService,private userService : UserService, private router :Router) { }
 
   ngOnInit(): void {
     this.cartService.CartObservable.subscribe({
@@ -21,6 +24,28 @@ export class HeaderComponent implements OnInit {
         
       }
     })
+
+    this.userService.loginObservable.subscribe({
+      next : () =>{
+        let token = this.userService.getToken();
+        if(token!=''){
+          this.isLoggedIn = true;
+        }else{
+          this.isLoggedIn = false;
+        }
+      }
+    })
   }
+
+checkAdmin(){
+  this.isAdmin$ = this.userService.isAdmin();
+}
+
+
+logout(){
+
+  this.userService.logout();
+  this.router.navigate(['login']);
+}
 
 }

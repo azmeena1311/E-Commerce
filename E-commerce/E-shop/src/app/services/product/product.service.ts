@@ -16,8 +16,12 @@ export class ProductService {
   constructor(private http :HttpClient,private userService :UserService) { }
 
 
-  getAllProducts(){
-    return this.http.get(this.getAllProductURL,
+  getAllProducts(params){
+    let query =  new URLSearchParams();
+    if(params['category']){
+      query.append('category',params['category'])
+    }
+    return this.http.get(`${this.getAllProductURL}?${query.toString()}`,
       {
         headers:{
           'authorization' : this.userService.getToken()

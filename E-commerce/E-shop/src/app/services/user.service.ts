@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { from } from 'rxjs';
+import { from, BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 import{map} from 'rxjs/operators';
 @Injectable({
@@ -11,10 +11,24 @@ export class UserService {
   private userSignupUrl ="http://localhost/api/users/signup";
 
   private userloginurl = "http://localhost/api/users/login";
-  constructor(private http :HttpClient) { }
+  private _loginObservable :BehaviorSubject<Object>;
+
+
+  constructor(private http :HttpClient) { 
+    this._loginObservable = new BehaviorSubject({});
+  }
+
+  public get loginObservable(){
+    return this._loginObservable
+  }
 
   private savetokenToLocalStorage(token: string){
     localStorage.setItem('token',"Bearer "+ token)
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this._loginObservable.next({})
   }
 
   getToken(){
@@ -30,6 +44,10 @@ export class UserService {
     )
   }
 
+  isAdmin(){
+    
+  }
+
 
   login(credentials :{email :string,password :string}){
 
@@ -38,6 +56,7 @@ export class UserService {
     map((result:loginResponse )=>{
 
       this.savetokenToLocalStorage(result.token)
+      this.loginObservable.next({});
       return <loginResponse>result
     })
   )
