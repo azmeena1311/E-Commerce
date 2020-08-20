@@ -74,4 +74,9 @@ export class CartService {
     this.writeCartDataFromLocalstorage();
     this._cartObservable.next(this.cart);
   }
+
+  clearCart(){
+    localStorage.removeItem('cart');
+    this._cartObservable.next({})
+  }
 }

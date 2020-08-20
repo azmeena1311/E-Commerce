@@ -16,6 +16,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import{HttpClientModule} from '@angular/common/http'
 import { from } from 'rxjs';
 import { ProductQuantityComponent } from './component/product-quantity/product-quantity.component';
+import{ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProductQuantityComponent } from './component/product-quantity/product-q
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

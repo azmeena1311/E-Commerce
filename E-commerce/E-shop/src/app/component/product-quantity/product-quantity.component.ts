@@ -29,18 +29,14 @@ export class ProductQuantityComponent implements OnInit {
     
   }
 
-
   minusQuantity(){
-
-    this.quantity--;
-    this.cartService.setQuantity(this.product,this.quantity);
-
+    this.quantity --;
+    this.cartService.setQuantity(this.product , this.quantity)
   }
 
   plusQuantity(){
     this.quantity++;
-    this.cartService.setQuantity(this.product,this.quantity);
-    
+    this.cartService.setQuantity(this.product , this.quantity)
   }
 
 }

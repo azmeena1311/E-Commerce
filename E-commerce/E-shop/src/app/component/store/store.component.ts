@@ -16,16 +16,19 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe({
-      next :(paramsMap :ParamMap)=>{
-        let categoryId = paramsMap.get('category');
+      next :(paramMap :ParamMap)=>{
+        let categoryId = paramMap.get('category');
+        let min = paramMap.get('min');
+        let max = paramMap.get('max');
+        
         console.log(categoryId);
-        this.collectAllproducts({category : categoryId});
+        this.collectAllproducts({category : categoryId,min,max});
       }
     })
    
   }
 
-  collectAllproducts(params ){
+  collectAllproducts(params){
     this.productService.getAllProducts(params)
     .subscribe({
       next : (products)=>{
